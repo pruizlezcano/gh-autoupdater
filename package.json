@@ -1,0 +1,29 @@
+{
+  "name": "gh-autoupdater",
+  "version": "0.0.0",
+  "description": "Compare local package.json and remote package.json and if versions don't match, copy remote files",
+  "main": "index.js",
+  "keywords": [
+    "GitHub",
+    "gh",
+    "updater",
+    "autoupdater"
+  ],
+  "author": "Pablo Ruiz Lezcano",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pruizlezcano/autoupdater/issues"
+  },
+  "homepage": "https://github.com/pruizlezcano/autoupdater",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pruizlezcano/autoupdater.git"
+  },
+  "dependencies": {
+    "axios": "^0.20.0",
+    "compare-versions": "^3.6.0",
+    "fs-extra": "^9.0.1",
+    "rimraf": "^3.0.2",
+    "simple-git": "^2.21.0"
+  }
+}
