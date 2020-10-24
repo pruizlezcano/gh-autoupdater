@@ -4,7 +4,7 @@ Compare local package.json and remote package.json and if versions don't match, 
 
 # Installation
 
-`npm install autoupdater`
+`npm install gh-autoupdater`
 
 # How it works?
 
