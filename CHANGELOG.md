@@ -1,4 +1,13 @@
-# 1.0.0 (2020-10-23)
+## [1.0.1](https://github.com/pruizlezcano/autoupdater/compare/v1.0.0...v1.0.1) (2020-10-24)
+
+
+### Bug Fixes
+
+* **readme:** package name ([248599e](https://github.com/pruizlezcano/autoupdater/commit/248599eef7705cf6f44a9cbb5ade0f122221a6ca))
+
+
+
+# [1.0.0](https://github.com/pruizlezcano/autoupdater/compare/bed491bbed342711b365a7b84966053642785c78...v1.0.0) (2020-10-23)
 
 
 ### Features

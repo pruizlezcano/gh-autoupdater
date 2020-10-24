@@ -1,6 +1,6 @@
 {
   "name": "gh-autoupdater",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Compare local package.json and remote package.json and if versions don't match, copy remote files",
   "main": "index.js",
   "keywords": [
