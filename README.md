@@ -22,6 +22,7 @@ Compare local package.json and remote package.json and if versions don't match, 
 - `ignore: ['.git',...]` - An array of files for not copiyng when updating.
 - `testing: false` - If true, copy update inside ./testing folder.
 - `dev: false` - If true, ignore the update.
+- `token: 123456...` - If you are using a private repository you should use a personal access token for downloading it
 
 This values are the default values
 
@@ -39,7 +40,7 @@ This values are the default values
 # Example
 
 ```javascript
-const AutoUpdate = require('');
+const AutoUpdate = require('gh-autoupdater');
 
 const update = new AutoUpdate({
   repo: 'https://github.com/user/repo',

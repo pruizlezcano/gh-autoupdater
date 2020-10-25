@@ -18,6 +18,7 @@ class AutoUpdate extends EventEmitter {
      * @param {Array[String]} ignore - An array of files to not install when updating.
      * @param {Boolean} testing - If true, copy update inside ./testing folder
      * @param {Boolean} dev - If true, ignore update
+     * @param {String} token - If you are using a private repository you should use a personal access token for downloading it
      */
     if (updateConfig.repo === undefined)
       throw new Error('You must incluede a repository link');
@@ -26,12 +27,8 @@ class AutoUpdate extends EventEmitter {
     if (updateConfig.ignore === undefined) updateConfig.ignore = ['.git'];
     else updateConfig.ignore.push('.git');
     if (updateConfig.testing === undefined) updateConfig.testing = false;
-    const gitFolder = fs.readdirSync('./').some((file) => file === '.git');
-    if (updateConfig.dev === undefined && !gitFolder) updateConfig.dev = false;
-    if (gitFolder) {
-      updateConfig.dev = true;
-    }
-    if (updateConfig.command === undefined) updateConfig.index = false;
+    if (updateConfig.dev === undefined) updateConfig.dev = false;
+    if (updateConfig.token === undefined) updateConfig.token = false;
     super(
       updateConfig.repo,
       updateConfig.branch,
@@ -39,7 +36,7 @@ class AutoUpdate extends EventEmitter {
       updateConfig.ignore,
       updateConfig.testing,
       updateConfig.dev,
-      updateConfig.command
+      updateConfig.token
     );
     this.repo = updateConfig.repo;
     this.branch = updateConfig.branch;
@@ -48,6 +45,7 @@ class AutoUpdate extends EventEmitter {
     this.testing = updateConfig.testing;
     this.dev = updateConfig.dev;
     this.command = updateConfig.command;
+    this.token = updateConfig.token;
   }
 
   /**
@@ -70,7 +68,18 @@ class AutoUpdate extends EventEmitter {
       .split('/')
       .slice(3)
       .join('/')}/${this.branch}/package.json`;
-    const { data } = await axios.get(pkg);
+    let data = undefined;
+    if (this.token) {
+      const res = await axios.get(pkg, {
+        headers: {
+          Authorization: `token ${this.token}`,
+        },
+      });
+      data = res.data;
+    } else {
+      const res = await axios.get(pkg);
+      data = res.data;
+    }
     return { version: data.version, modules: data.dependencies };
   }
 
@@ -151,7 +160,15 @@ class AutoUpdate extends EventEmitter {
     this.emit('download.start', this.repo);
     await fs.ensureDir(this.temp);
     await fs.emptyDir(this.temp);
-    await git.clone(this.repo, this.temp);
+    if (this.token) {
+      const split = this.repo.split('/');
+      const user = split[3];
+      const repo = split[4];
+      const url = `https://${user}:${this.token}@github.com/${user}/${repo}`;
+      await git.clone(url, this.temp);
+    } else {
+      await git.clone(this.repo, this.temp);
+    }
     return this.emit('download.end', this.repo);
   }
 

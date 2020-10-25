@@ -12,12 +12,12 @@
   "author": "Pablo Ruiz Lezcano",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pruizlezcano/autoupdater/issues"
+    "url": "https://github.com/pruizlezcano/gh-autoupdater/issues"
   },
-  "homepage": "https://github.com/pruizlezcano/autoupdater",
+  "homepage": "https://github.com/pruizlezcano/gh-autoupdater",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pruizlezcano/autoupdater.git"
+    "url": "git+https://github.com/pruizlezcano/gh-autoupdater.git"
   },
   "dependencies": {
     "axios": "^0.20.0",
